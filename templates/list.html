@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block body %}
+    	<table class="table table-bordered">
+    		<thead>
+    			<tr>
+    				<th>Folders:</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			{% if prev %}
+	    			<tr><td><a href="/go/?to={{prev}}">level up</a></td></tr>
+	    		{% endif %}	
+		        {% for single in result %}
+		    		<tr><td><a href="/go/?to={{curdir}}{{single}}/">{{single}}</a></td></tr>
+		    	{% endfor %}
+	    	</tbody>
+	    </table>
+{% endblock %}

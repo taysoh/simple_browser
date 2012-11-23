@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="row">
+			<div class="span5">
+			<form action="/" method="POST"> {% csrf_token %}
+				<div class="span2">
+					{% if add %}
+		    			<tr>
+		    				<p style="color: red;">Access was added successfull</p>
+		    			</tr><br />
+		    		{% endif %}
+					
+		    		<p>host:</p>
+		    		<p>login:</p>
+		    		<p>password:</p>
+		    		<p>startdir:</p>
+		    		<p>select action:</p>
+		    	</div>
+		    	<div class="span2">
+					{{ form.host }}
+					{{ form.login }}
+					{{ form.password }}
+					{{ form.startdir }}
+					<select name="action">
+						<option value="save">Save</option>
+						<option value="connect">Connect</option>
+					</select>
+					<input type="submit" value="submit" class="btn">
+		    	</div>
+
+		    </form>
+		    </div>
+		    <div class="span4">
+		    	{% if all_access %}
+			    	<td>
+			    		<form action="/connect_existed/" method="POST"> {% csrf_token %}
+				    		<tr>
+				    			<td>Connect to:</td>
+				    			<td>
+				    				<select name="connect">
+				    				{% for access in all_access %}
+				    					<option value="{{access.host}}">{{access.login}}@{{access.host}}</option>
+				    				{% endfor %}
+				    				</select>
+				    			</td>
+				    			<td><input type="submit" value="submit" class="btn"></td>
+				    		</tr>
+				    	</form>	
+			    	</td>
+			    {% endif %}
+			</div>
+</div>
+
+{% endblock %}
